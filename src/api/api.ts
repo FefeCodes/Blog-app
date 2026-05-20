@@ -1,17 +1,16 @@
-import type { Blog } from '@/types/blog'
+import type { Blog, PaginatedBlogs } from '@/types/blog'
 
 const BASE_URL = 'https://api.oluwasetemi.dev'
 
-export async function getPosts(): Promise<Blog[]> {
-  const response = await fetch(`${BASE_URL}/posts`)
+export async function getPosts(page: number = 1, limit: number = 10): Promise<PaginatedBlogs> {
+  const response = await fetch(`${BASE_URL}/posts?page=${page}&limit=${limit}`)
 
   if (!response.ok) {
     throw new Error('Failed to fetch posts')
   }
 
   const result = await response.json()
-
-  return result.posts || result.data || result
+  return result
 }
 
 export async function getPost(id: string): Promise<Blog> {

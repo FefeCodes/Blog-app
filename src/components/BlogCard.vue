@@ -9,7 +9,7 @@ defineProps<{
 <template>
   <div class="card">
     <h2>{{ post.title }}</h2>
-    <p>{{ post.body.slice(0, 100) }}...</p>
+    <p>{{ post.excerpt || (post.content ? post.content.slice(0, 100) + '...' : '') }}</p>
 
     <router-link :to="`/post/${post.id}`">Read more</router-link>
   </div>
