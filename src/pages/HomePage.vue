@@ -35,29 +35,40 @@ const nextPage = () => {
 </script>
 
 <template>
-  <div>
-    <h1>Blog Posts</h1>
-
+  <div class="home-page">
     <div v-if="loading">Loading posts...</div>
 
-    <div v-else>
+    <div v-else class="nud">
       <BlogCard v-for="post in posts" :key="post.id" :post="post" />
-      
+
       <div v-if="meta" class="pagination">
-        <button :disabled="!meta.hasPreviousPage" @click="prevPage">
-          Previous
-        </button>
+        <button :disabled="!meta.hasPreviousPage" @click="prevPage">Previous</button>
         <span class="page-info">Page {{ meta.page }} of {{ meta.totalPages }}</span>
-        <button :disabled="!meta.hasNextPage" @click="nextPage">
-          Next
-        </button>
+        <button :disabled="!meta.hasNextPage" @click="nextPage">Next</button>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+.home-page {
+  width: 100%;
+  padding: 2rem 0;
+}
+
+.nud {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 1.5rem;
+}
+
+h1 {
+  color: white;
+  padding-bottom: 1rem;
+}
+
 .pagination {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -67,12 +78,13 @@ const nextPage = () => {
 }
 
 .pagination button {
-  padding: 0.5rem 1rem;
+  padding: 0.8rem 1rem;
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 8px;
   cursor: pointer;
+  font-size: 1.2rem;
 }
 
 .pagination button:disabled {
@@ -82,5 +94,6 @@ const nextPage = () => {
 
 .page-info {
   font-weight: bold;
+  color: #fff;
 }
 </style>
